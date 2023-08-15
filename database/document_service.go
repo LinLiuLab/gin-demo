@@ -1,13 +1,12 @@
 package database
 
 import (
-	"fmt"
 	"gin-demo/model"
+
 	"gorm.io/gorm"
 )
 
 func CreateDocument(document *model.Document, db *gorm.DB) error {
-	fmt.Println("CreateDocument {}", document.Title)
 	return db.Create(document).Error
 }
 
