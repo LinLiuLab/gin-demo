@@ -1,6 +1,6 @@
 # Gin Demo
 
-Demo of using the Gin web framework for the [Software Engineering 20234](https://linliulab.github.io/SE-2024/) course.
+Demo of using the Gin web framework for the [Software Engineering 2024](https://linliulab.github.io/SE-2024/) course.
 
 ## Pre-requisites
 
