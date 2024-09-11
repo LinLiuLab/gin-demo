@@ -3,6 +3,7 @@ package main
 import (
 	"gin-demo/handler"
 	"gin-demo/model"
+	"github.com/gin-contrib/cors"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
@@ -26,20 +27,21 @@ func InitializeDatabase() {
 func main() {
 	InitializeDatabase()
 	r := gin.Default()
-	r.GET("/document/:id", func(c *gin.Context) {
+	r.Use(cors.Default())
+	r.GET("/document/:id/", func(c *gin.Context) {
 		handler.GetDocumentHandler(c, db)
 	})
-	r.GET("/document", func(c *gin.Context) {
+	r.GET("/document/", func(c *gin.Context) {
 		handler.GetAllDocumentsHandler(c, db)
 	})
-	r.POST("/document", func(c *gin.Context) {
+	r.POST("/document/", func(c *gin.Context) {
 		handler.CreateDocumentHandler(c, db)
 	})
-	r.PUT("/document/:id", func(c *gin.Context) {
+	r.PUT("/document/:id/", func(c *gin.Context) {
 		handler.UpdateDocumentHandler(c, db)
 	})
 	r.DELETE("/document/:id", func(c *gin.Context) {
 		handler.DeleteDocumentHandler(c, db)
 	})
-	r.Run(":8000") // listen and serve on localhost:8000
+	r.Run(":8003") // listen and serve on localhost:8000
 }

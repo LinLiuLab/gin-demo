@@ -3,20 +3,17 @@ package handler
 import (
 	"gin-demo/database"
 	"gin-demo/model"
-	"strconv"
-
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"net/http"
+	"strconv"
 )
 
 func CreateDocumentHandler(c *gin.Context, db *gorm.DB) {
-	title := c.PostForm("title")
-	content := c.PostForm("content")
-	published := c.PostForm("published")
-	document := model.Document{
-		Title:     title,
-		Content:   content,
-		Published: published == "true",
+	var document model.Document
+	if err := c.ShouldBindJSON(&document); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 	err := database.CreateDocument(&document, db)
 	if err != nil {

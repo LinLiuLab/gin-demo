@@ -7,7 +7,8 @@ import (
 // Document represents a document model in the database.
 type Document struct {
 	gorm.Model
-	Title     string
-	Content   string
-	Published bool
+	ID        uint   `json:"id" gorm:"primaryKey"`
+	Title     string `json:"title"`
+	Content   string `json:"content"`
+	Published bool   `json:"published"`
 }
